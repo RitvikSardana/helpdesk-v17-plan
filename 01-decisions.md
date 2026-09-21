@@ -98,6 +98,16 @@ Consequence: the upgrade patch cannot write to it. A Helpdesk patch cannot inser
 
 So the patch records what it created on its own side, on the already deprecated `HD Customer`, and the migrator reads that on first run to build its queue and its log. No cross app write, no install order dependency, and a site that adds the migrator months later still finds the list waiting. See [04-migrator.md](04-migrator.md).
 
+## Field conflicts are shown, never resolved by default
+
+Step 2 of the migrator copies `HD Customer` values onto the `Customer` a ticket now points at. Where both sides hold a value and the values differ, the migrator does not pick.
+
+There is no default worth shipping. Helpdesk is the fresher source for support data, `domain` and `email_id` and `mobile_no`, because agents correct it while working a ticket. ERPNext is the fresher source for anything billing touched. A rule that is right for one field is wrong for the next.
+
+So the tool finds the conflicts and hands them back. It knows both sides already, because it has to read them to copy them, which means it can list exactly which rows differ on which field and show the two values side by side. The user picks, per field, and can apply that pick to every row on that field in one action.
+
+A site with no conflicts never sees the screen. See [04-migrator.md](04-migrator.md).
+
 ## CRM is another owner
 
 CRM work is not in this plan. The one thing Helpdesk needs from CRM is that `CRM Organization` folds into `Customer`, giving both apps a shared key. That is confirmed and tracked as a dependency in `07-order-of-work.md`.

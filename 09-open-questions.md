@@ -72,16 +72,6 @@ Leaning: repoint it in a patch so mail creates an `HD Ticket`. Open because the 
 
 Blocks nothing. Belongs in [03-support-module-cleanup.md](03-support-module-cleanup.md).
 
-### Which side wins a field conflict
-
-Step 2 of the migrator copies `HD Customer` values onto the `Customer` a ticket now points at. Where both hold a value and they differ, somebody picks.
-
-There is no obvious default. Helpdesk is the fresher source for support data, `domain` and `email_id` and `mobile_no`, because agents correct it while working a ticket. ERPNext is the fresher source for anything billing touched. A per field default is possible, a global one is not.
-
-Open: a global default with a per field override, a per field default shipped with the tool, or no default and every conflict is shown.
-
-Blocks nothing now. Has to be answered before [04-migrator.md](04-migrator.md) ships.
-
 ## Deferred, with a trigger
 
 These are decided for v17. They reopen only if the trigger fires.

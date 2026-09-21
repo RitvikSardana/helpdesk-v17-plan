@@ -246,6 +246,16 @@ Defaults prefilled by name and type match, so a typical site clicks through this
 
 The one that needs care is skipping. It is a data loss and the wording has to say so rather than calling it a skip.
 
+### The conflict screen
+
+The tool does not guess which side is right. It finds the conflicts and asks.
+
+It is already reading both sides to copy them, so it knows exactly which rows differ and on which field. That becomes a screen: one section per field in conflict, the two values side by side, and the rows they came from. The user picks a side for the field and applies it to every row at once, or opens the list and picks per row where the field matters enough.
+
+Nothing is written until step 5, so a user can look at every conflict and walk away. A site with no conflicts never sees the screen at all.
+
+Settled in [01-decisions.md](01-decisions.md).
+
 ## Merging
 
 Frappe already has the mechanism: `rename_doc` with `merge=True`. It repoints every reference to the surviving name and deletes the other.
